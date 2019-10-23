@@ -6,6 +6,6 @@ class Employee < ApplicationRecord
 
   has_many :skills, through: :employee_skills
   has_many :job_postings, through: :applications
-  has_many :feedbacks
+  has_many :feedbacks, through :applications
 
 end
