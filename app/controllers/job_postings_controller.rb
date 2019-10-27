@@ -3,6 +3,9 @@ class JobPostingsController < ApplicationController
     @job_posting = JobPosting.new
   end
 
+  def show
+  end
+
   def new
     @job_posting = JobPosting.new
   end
