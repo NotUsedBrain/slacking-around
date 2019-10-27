@@ -5,4 +5,6 @@ class Employer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :job_postings
+  has_many :job_applications, through: :job_postings
+  has_many :feedbacks, through: :job_applications
 end
