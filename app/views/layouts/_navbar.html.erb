@@ -1,0 +1,7 @@
+<% if employer_signed_in? %>
+    <%= render 'layouts/navbar/employer'%>
+<% elsif employee_signed_in? %>
+    <%= render 'layouts/navbar/employee'%>
+<% else %>
+    <%= render 'layouts/navbar/main_nav'%>
+<% end %>

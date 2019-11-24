@@ -1,0 +1,17 @@
+<strong>Job Application Page</strong>
+
+<p>List of Applications</p>
+
+<h1> Applications for your Job Postings</h1>
+
+<% if @job_applications %> 
+
+  <% @job_applications.job_postings.each do |job| %>
+    <div class='container'>
+        <p><%= link_to job.content, "/job_applications/#{job.id}" %></p>
+    </div>
+  <% end %>
+
+<% else %>
+  <p>No applications</p>
+<% end %>

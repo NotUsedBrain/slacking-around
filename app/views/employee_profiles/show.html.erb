@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<div>
+  <% if @employee_profile.avatar.attached? %>
+    <%= image_tag(@employee_profile.avatar, :class => "rounded-circle", :size => "240x240") %>
+  <% end %>
+</div>
+
+<p>
+  <strong>Profession:</strong>
+  <%= @employee_profile.profession.name %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @employee_profile.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @employee_profile.last_name %>
+</p>
+
+<p>
+  <strong>Date of birth:</strong>
+  <%= @employee_profile.date_of_birth %>
+</p>
+
+<%= link_to 'Edit', edit_employee_profile_path(@employee_profile) %> |
+<%= link_to 'Back', root_path %>

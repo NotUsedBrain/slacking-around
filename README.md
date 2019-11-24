@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Hope you are ready for a shock!
 
-Things you may want to cover:
+still need to re-implement my work done previously on proffessions
 
-* Ruby version
+employer_profile is missing
 
-* System dependencies
+This requires completely new database. Drop your current db and make a new one with different name if you wish to test this branch.
 
-* Configuration
+In order to add professions go to rails console and type: Profession.connection and create new professions, 3-4 is enough to test it
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+>Profession.create(name: "Chef")
+>Profession.create(name: "Waiter")
+>Profession.create(name: "Kitchen Porter")

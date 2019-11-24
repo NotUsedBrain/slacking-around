@@ -1,0 +1,41 @@
+<%= form_with(model: employee_profile, local: true) do |form| %>
+  <% if employee_profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(employee_profile.errors.count, "error") %> prohibited this employee_profile from being saved:</h2>
+
+      <ul>
+        <% employee_profile.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+  <%= form.collection_select :profession_id, Profession.all, :id, :name, {prompt: "Choose a profession" } %>
+  </div><br>
+
+  <div class="field">
+    <%= form.label "Profile Picture" %>
+    <%= form.file_field :avatar %>
+  </div>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_of_birth %>
+    <%= form.text_field :date_of_birth %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
