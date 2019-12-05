@@ -1,11 +1,11 @@
 <% @current_employee.job_applications.each do |post|%>
   <div class='container'>
     <%= 'Opening for '%>
-    <strong> <%= link_to post.job_posting.title %> </strong>
+    <strong> <%= link_to post.job_posting.title, job_posting_url(post.job_posting) %> </strong>
     <%= 'at #'%>
-    <strong> <%= post.employee_id %> </strong> #to be amended to show employer business name
-    <%= 'starting at: '%>
-    <%= post.job_posting.start_time%>
-    <%= link_to 'Delete', post, method: :delete, data: {confirm: 'Are you sure?'} %>
+    <strong> <%= post.job_posting.employer.employer_profile.business_name %> </strong>
+    <%= 'starting: '%>
+    <%= post.job_posting.start_time.strftime("%d %b %Y at %H:%m") %>
+    <%= link_to 'Cancel Application', post, method: :delete, data: {confirm: 'Are you sure?'} %>
   </div>
 <% end %>

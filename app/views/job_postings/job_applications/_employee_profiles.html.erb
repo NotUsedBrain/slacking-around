@@ -1,0 +1,31 @@
+<div>
+  <% if current_employer %>
+    <p>
+      <% if @job_application.employee.employee_profile.avatar.attached? %>
+        <%= image_tag(@job_application.employee.employee_profile.avatar, :class => "style_image")  %>
+      <% else %>
+        <%= image_tag('default.jpg', :class => "style_image") %>
+      <% end %>
+    </p>
+
+    <p> 
+      <strong>First name:</strong>
+      <%= @job_application.employee.employee_profile.first_name %> 
+    </p>
+
+    <p> 
+      <strong>Last name:</strong>
+      <%= @job_application.employee.employee_profile.last_name %> 
+    </p>
+
+    <p> 
+      <strong>Date of birth:</strong>
+      <%= @job_application.employee.employee_profile.date_of_birth %> 
+    </p>
+
+    <p>   
+      <strong>Profession:</strong>
+      <%= @job_application.employee.employee_profile.profession.name %> 
+    </p>
+  <% end %>
+</div>

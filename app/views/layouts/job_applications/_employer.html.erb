@@ -1,12 +1,9 @@
-
-<% @job_applications.each do |post|%>
-  <div class='container'>
-    <%= 'Opening for '%>
-    <strong> <%= link_to post.job_posting.title, post %> </strong>
-    <%= 'at '%>
-    <strong> <%= post.job_posting.title %> </strong>
-    <%= 'starting at: '%>
-    <%= post.job_posting.start_time %>
-    <%= link_to 'Delete', post, method: :delete, data: {confirm: 'Are you sure?'} %>
-  </div>
-<% end %>
+<% if current_employer %>
+    <% @current_employer.job_postings.each do |post|%>
+      <div class='container'>
+        <strong> <%= link_to post.title, post %> </strong>
+        <%= 'starting: '%>
+        <%= post.start_time.strftime("%d %b %Y at %H:%m") %>
+      </div>
+    <% end %>
+  <% end %>

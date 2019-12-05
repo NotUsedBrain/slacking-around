@@ -15,10 +15,10 @@
 
 <p>
   <strong>Start Time:</strong>
-  <%= @job_posting.start_time %>
+  <%= @job_posting.start_time.strftime("%d %b %Y at %H:%m") %>
   <br>
   <strong>End Time:</strong>
-  <%= @job_posting.end_time %>
+  <%= @job_posting.end_time.strftime("%d %b %Y at %H:%m")%>
 </p>
 
 <p>
@@ -26,10 +26,23 @@
   <%= @job_posting.hourly_rate %>
 </p>
 
-<p>
-  <%= form_with(model: JobApplication.new, url: job_posting_job_applications_path(@job_posting), local: true) do |form| %>
-    <%= form.submit 'Apply', data: {confirm: 'Please confirm your application by clicking OK:'} %>
+<p> <%# section missing code to link employee names to respective profiles %>
+<% if current_employer %>
+  <strong> Pending Applications: </strong> <br>
+  <% @job_posting.job_applications.each do |job_application| %>
+    <%= link_to job_application.employee.employee_profile.full_name, job_posting_job_application_path(@job_posting, job_application) %> <br>
   <% end %>
+<% end %>
 </p>
 
+<% if current_employer %>
+  <%= link_to 'Delete',[@job_posting], method: :delete %>
+<% end %>
 
+<p>
+<% if current_employee %>
+  <%= form_with(model: JobApplication.new, url: job_posting_job_applications_path(@job_posting), local: true) do |form| %>
+    <%= form.submit 'Apply', data: {confirm: 'Please confirm your application by clicking OK:'} %>
+  <% end %> 
+<% end %>
+</p>

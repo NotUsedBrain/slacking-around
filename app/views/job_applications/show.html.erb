@@ -1,6 +1,13 @@
+<br>HELLO
+<%# This page only shows for employees when they select job from job_applications/_employee page %>
 
-
-<%= @job_posting.last.title%>
-
-<%# if employee_profile.profession_id == job_posting.profession_id
-employeeprofile.name %>
+<body>
+  <% if current_employee %>
+    <% current_employee.employee_profile.profession.job_postings.each do |job| %>
+    <div class='container'>
+      <%= link_to job.title, job %>
+      <%= job.employer.employer_profile.business_name %>
+    </div>
+    <% end %>
+  <% end %>
+</body>

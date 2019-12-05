@@ -4,40 +4,56 @@
       <p><%= error %></p> 
     <% end %>
   <% end %>
-  
-  <div class='form-inline'>
+
+<div class='jumbotron'>
+  Job Post
+</div>
+<div class= 'form-row justify-content-left text-center'>
+  <div class='form-group col-md-2'>
     <%= form.label :title %>
     <%= form.text_field :title, class: 'form-control' %>
   </div>
 
-  <div>
-  <%= form.collection_select :profession_id, Profession.all, :id, :name, {prompt: "Choose a profession" } %>
-  </div>
-  
-  <div>
-    <%= form.label :content %>
-    <%= form.text_area :content %>
-  </div>
-
-  <div>
-    <%= form.label :start_time %>
-    <%= form.time_field :start_time %>
-  </div>
-
- <div>
-    <%= form.label :end_time %>
-    <%= form.time_field :end_time %>
-  </div>
-
- <div>
+  <div class='form-group col-md-2'>
     <%= form.label :hourly_rate %>
-    <%= form.number_field :hourly_rate, step: :any %>
+    <%= form.number_field :hourly_rate, step: :any, class: 'form-control', placeholder: '£ 0.00' %>
   </div>
-<br>
-  
-<br>
-  <div>
-    <%= form.submit :Submit %>
+</div>
+
+<div class= 'form-row justify-content-center text-center'>
+  <div class='form-group col-md-4'>
+    <%= form.label :content %>
+    <%= form.text_area :content, class: 'form-control' %>
   </div>
+</div>
+
+<div class= 'form-row justify-content-center text-center'>
+  <div class='form-group col-md-2'>
+    <%= form.label :start_time %>
+    <%= form.time_field :start_time, value: Time.now, class: 'form-control' %>
+  </div>
+
+ <div class='form-group col-md-2'>
+    <%= form.label :end_time %>
+    <%= form.time_field :end_time, class: 'form-control', value: Time.now %>
+  </div>
+</div>
+
+<div class= 'form-row justify-content-center text-center'>
+ 
+</div>
+  <br>
+
+<div class= 'form-row justify-content-center text-center'>
+  <div class= 'form-group col-md-3'>
+    <%= form.collection_select :profession_id, Profession.all, :id, :name, {prompt: "Choose a profession" }, class: 'form-control' %>
+  </div>
+</div>
+
+<div class= 'form-row justify-content-center text-center'>
+  <div class='form-group'>
+    <%= form.submit :Submit, class: 'btn btn-primary' %>
+  </div>
+</div>
 
 <% end %>
