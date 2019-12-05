@@ -6,4 +6,5 @@ class Employer < ApplicationRecord
 
   has_many :job_postings
   has_one :employer_profile, dependent: :destroy
+  has_many :comments, dependent: :destroy
 end
