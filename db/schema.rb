@@ -63,11 +63,6 @@ ActiveRecord::Schema.define(version: 2019_12_04_184102) do
     t.integer "profession_id"
   end
 
-  create_table "employee_skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.integer "employee_id"
-    t.integer "skill_id"
-  end
-
   create_table "employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -85,21 +80,8 @@ ActiveRecord::Schema.define(version: 2019_12_04_184102) do
     t.string "unconfirmed_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "first_name"
-    t.string "last_name"
-    t.string "avatar"
-    t.string "phone_number"
     t.index ["email"], name: "index_employees_on_email", unique: true
     t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true
-  end
-
-  create_table "employees_skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "skill_id"
-    t.bigint "employee_id"
-    t.index ["employee_id"], name: "index_employees_skills_on_employee_id"
-    t.index ["skill_id"], name: "index_employees_skills_on_skill_id"
   end
 
   create_table "employer_profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -128,10 +110,6 @@ ActiveRecord::Schema.define(version: 2019_12_04_184102) do
     t.string "unconfirmed_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "first_name"
-    t.string "last_name"
-    t.string "business_name"
-    t.string "profile"
     t.index ["email"], name: "index_employers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_employers_on_reset_password_token", unique: true
   end
@@ -151,11 +129,6 @@ ActiveRecord::Schema.define(version: 2019_12_04_184102) do
     t.index ["discarded_at"], name: "index_job_applications_on_discarded_at"
   end
 
-  create_table "job_posting_skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "job_postings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.text "content"
     t.datetime "start_time"
@@ -166,31 +139,11 @@ ActiveRecord::Schema.define(version: 2019_12_04_184102) do
     t.integer "profession_id"
   end
 
-  create_table "job_postings_skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.integer "job_posting_id"
-    t.integer "skill_id"
-  end
-
   create_table "professions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "date_of_birth"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name"
-    t.integer "role"
-  end
-
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "employees_skills", "employees"
-  add_foreign_key "employees_skills", "skills"
 end
