@@ -5,5 +5,8 @@ class JobPosting < ApplicationRecord
   has_many :feedbacks
   has_many :job_applications
 
+  include Discard::Model
+  default_scope -> { kept }
+
   validates(:content, presence: true)
 end

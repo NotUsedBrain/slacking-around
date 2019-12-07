@@ -1,37 +1,40 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <%= link_to image_tag('brand-logo.png', size: '30x30', alt: "Brand"), root_path, class: 'navbar-brand' %>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-
-    <li class="nav-item active">
-    <% if current_employer.employer_profile == nil %>
-      <%= link_to 'Create Profile', new_employer_profile_path, class: "nav-link" %>
-    <% else %>
-      <%= link_to 'Profile', current_employer.employer_profile, class: "nav-link" %>
-    <% end %>
-  </li>
-
-     <li class="nav-item active">
-        <%= link_to 'Applications', job_applications_path, class: "nav-link" %>
-      </li>
-
-      <li class="nav-item active">
-        <%= link_to 'New Job Post', new_job_posting_path, class: "nav-link" %>
-      </li>
+<div class="bg-light">
+  <div class="content-wrap">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <%= link_to image_tag('brand-logo.png', size: '30x30', alt: "Brand"), root_path, class: 'navbar-brand' %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
       
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Account
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <p class="dropdown-item"><%= current_employer.email %></p>
-          <div class="dropdown-divider"></div>
-          <%= link_to 'Log Out', destroy_employer_session_path, method: :delete, class: "dropdown-item" %>
+          <li class="nav-item active">
+          <% if current_employer.employer_profile == nil %>
+            <%= link_to 'Create Profile', new_employer_profile_path, class: "nav-link" %>
+          <% else %>
+            <%= link_to 'Profile', current_employer.employer_profile, class: "nav-link" %>
+          <% end %>
+        </li>
+      
+            <li class="nav-item active">
+              <%= link_to 'Applications', job_applications_path, class: "nav-link" %>
+            </li>
+      
+            <li class="nav-item active">
+              <%= link_to 'New Job Post', new_job_posting_path, class: "nav-link" %>
+            </li>
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Account
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <p class="dropdown-item"><%= current_employer.email %></p>
+                <div class="dropdown-divider"></div>
+                <%= link_to 'Log Out', destroy_employer_session_path, method: :delete, class: "dropdown-item" %>
+              </div>
+            </li>
+          </ul>
         </div>
-      </li>
-    </ul>
+      </nav>
   </div>
-</nav>
-
+</div>
   

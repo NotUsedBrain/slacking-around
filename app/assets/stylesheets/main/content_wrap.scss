@@ -1,0 +1,20 @@
+.content-wrap {
+  width: 100%;
+
+  @include breakpoint(small) {
+    margin: 0 auto;
+    max-width: map-get($breakpoint-sizes, 'sm');
+  }
+
+  @include breakpoint(medium) {
+    max-width: map-get($breakpoint-sizes, 'md');
+  }
+
+  @include breakpoint(large) {
+    max-width: map-get($breakpoint-sizes, 'lg');
+  }
+
+  @include breakpoint(great) {
+    max-width: map-get($breakpoint-sizes, 'gt');
+  }
+}

@@ -1,48 +1,64 @@
-<p>
-  <strong>Profession:</strong>
-  <%= @job_posting.profession.name %>
-</p>
+<div class="section-panel">
+  <div class="section-panel__inner">
+    <div class="flex flex--align-items flex--justify-between">
+        <h2>
+          <%= @job_posting.title %>
+        </h2>
+        <div>
+          <span class="chip">
+            <%= @job_posting.profession.name %>
+          </span>
+        </div>
+      </div>
+      <hr>
+      <h5>Content</h5>
+      <p>
+        <%= @job_posting.content %>
+      </p>
+      <hr>
+      <div class="flex flex--gutters">
+        <div>
+          <span><strong>Start: </strong><%= @job_posting.start_time.strftime("%d %b %Y at %H:%m") %></span>
+        </div>
+        <div>
+          <span class="vertical-divider"></span>
+        </div>
+        <div>
+          <span><strong>End: </strong><%= @job_posting.end_time.strftime("%d %b %Y at %H:%m")%></span>
+        </div>
+        <div>
+            <span class="vertical-divider"></span>
+          </div>
+        <div>
+          <span><strong>Hourly Rate: </strong><%= @job_posting.hourly_rate %></span>
+        </div>
+      </div>  
+      <hr>
+    
+      <div>
+        <% if current_employer %>
+          <%= link_to 'Delete', [@job_posting], method: :delete, data: { confirm: 'Are you sure you want to delete this job posting?' }, class: 'button button--danger' %>
+        <% end %>
+      </div>
+    
+      <div>
+        <% if current_employee %>
+          <%= form_with(model: JobApplication.new, url: job_posting_job_applications_path(@job_posting), local: true) do |form| %>
+            <%= form.submit 'Apply', data: { confirm: 'Please confirm your application by clicking OK:' }, class: 'button button--success' %>
+          <% end %> 
+        <% end %>
+      </div>
+  </div>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @job_posting.title %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @job_posting.content %>
-</p>
-
-<p>
-  <strong>Start Time:</strong>
-  <%= @job_posting.start_time.strftime("%d %b %Y at %H:%m") %>
+<% if current_employer %>
   <br>
-  <strong>End Time:</strong>
-  <%= @job_posting.end_time.strftime("%d %b %Y at %H:%m")%>
-</p>
+  <h1 class="subheading">Applicants</h1>
 
-<p>
-  <strong>Hourly Rate:</strong>
-  <%= @job_posting.hourly_rate %>
-</p>
-
-<p> <%# section missing code to link employee names to respective profiles %>
-<% if current_employer %>
-  <strong> Pending Applications: </strong> <br>
-  <% @job_posting.job_applications.each do |job_application| %>
-    <%= link_to job_application.employee.employee_profile.full_name, job_posting_job_application_path(@job_posting, job_application) %> <br>
-  <% end %>
+  <div class="flex flex--gutters-2x">
+    <% @job_posting.job_applications.each do |job_application| %>
+      <%= render 'applicant', application: job_application %>
+    <% end %>
+  </div>
+  
 <% end %>
-</p>
-
-<% if current_employer %>
-  <%= link_to 'Delete',[@job_posting], method: :delete %>
-<% end %>
-
-<p>
-<% if current_employee %>
-  <%= form_with(model: JobApplication.new, url: job_posting_job_applications_path(@job_posting), local: true) do |form| %>
-    <%= form.submit 'Apply', data: {confirm: 'Please confirm your application by clicking OK:'} %>
-  <% end %> 
-<% end %>
-</p>

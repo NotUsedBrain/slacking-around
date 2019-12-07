@@ -1,0 +1,23 @@
+<%= link_to job_posting_job_application_path(@job_posting, application), class: "col-mc-1-1 col-md-1-3" do %>
+  <div class="section-panel">
+    <div class="flex flex--nowrap">
+      <div>
+        <% if application.employee.employee_profile.avatar.attached? %>
+          <%= image_tag application.employee.employee_profile.avatar, style: 'height: 100px' %>
+        <% else %>
+          <%= image_tag 'default.jpg', style: 'height: 100px' %>
+        <% end %>
+      </div>
+      <div>
+        <div class="section-panel__inner">
+          <p style="margin-bottom: 0.6rem">
+              <%= application.employee.employee_profile.full_name %>
+          </p>
+          <p class="body-text" style="margin-bottom: 0">
+            <%= truncate(application.employee.employee_profile.bio, length: 35) %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

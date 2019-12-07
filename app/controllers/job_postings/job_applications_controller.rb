@@ -1,7 +1,7 @@
 module JobPostings
   class JobApplicationsController < ApplicationController
     before_action :set_job_posting
-    before_action :set_job_application
+    before_action :set_job_application, except: [:create]
     before_action :check_user
 
     def create
@@ -11,7 +11,6 @@ module JobPostings
       else 
         @job_application.save
         redirect_to root_path, notice: 'Job Application was successful.'
-
       end
     end
 
@@ -38,7 +37,7 @@ module JobPostings
     end
 
     def already_applied?
-      @job_application = JobApplication.where(employee_id: current_employee.id, job_posting_id:
+      JobApplication.where(employee_id: current_employee.id, job_posting_id:
       params[:job_posting_id]).exists?
     end
 

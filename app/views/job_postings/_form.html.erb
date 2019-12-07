@@ -30,12 +30,12 @@
 <div class= 'form-row justify-content-center text-center'>
   <div class='form-group col-md-2'>
     <%= form.label :start_time %>
-    <%= form.time_field :start_time, value: Time.now, class: 'form-control' %>
+    <%= form.text_field :start_time, class: 'datepicker' %>
   </div>
 
  <div class='form-group col-md-2'>
     <%= form.label :end_time %>
-    <%= form.time_field :end_time, class: 'form-control', value: Time.now %>
+    <%= form.text_field :end_time, class: 'datepicker' %>
   </div>
 </div>
 

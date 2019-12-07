@@ -3,11 +3,7 @@ class JobApplicationsController < ApplicationController
   before_action :check_user
 
   def index
-    @job_applications = JobApplication.all
-  end
-
-  def new
-    @job_application = JobApplication.new
+    @job_application = JobApplication.all
   end
 
   def show
@@ -38,8 +34,14 @@ class JobApplicationsController < ApplicationController
 
   def destroy
     @job_application = JobApplication.find(params[:id])
-    @job_application.destroy
-    redirect_to root_path, notice: 'Job Application Removed'
+    @job_application.discard
+    redirect_to root_path, notice: 'Job Application Discarded'
+  end
+
+  def undiscard
+    @job_application = JobApplication.find(params[:id])
+    @job_application.undiscard
+    redirect_to root_path, notice: 'Job Application Undiscarded'
   end
 
   private
