@@ -29,7 +29,15 @@
   <%= @employee_profile.date_of_birth %>
 </p>
  
-<% if current_employee %>
-  <%= link_to 'Edit', edit_employee_profile_path(@employee_profile) %> |
-  <%= link_to 'Back', root_path %>
+
+
+<%= link_to 'Edit', edit_employee_profile_path(@employee_profile) %> |
+<%= link_to 'Back', root_path %>
+
+<br>
+<br>
+<h2>Comments:</h2>
+<%= form_with(model: [@employee_profile, @employee_profile.comments.build]) do |f| %>
+  <%= f.text_area :content, placeholder: "write a comment for this Employee" %><br>
+  <%= f.submit "post", class: "btn btn-primary" %>
 <% end %>
