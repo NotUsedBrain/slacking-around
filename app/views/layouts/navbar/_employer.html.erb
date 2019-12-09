@@ -5,15 +5,6 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-      
-          <li class="nav-item active">
-          <% if current_employer.employer_profile == nil %>
-            <%= link_to 'Create Profile', new_employer_profile_path, class: "nav-link" %>
-          <% else %>
-            <%= link_to 'Profile', current_employer.employer_profile, class: "nav-link" %>
-          <% end %>
-        </li>
-      
             <li class="nav-item active">
               <%= link_to 'Applications', job_applications_path, class: "nav-link" %>
             </li>
@@ -21,7 +12,8 @@
             <li class="nav-item active">
               <%= link_to 'New Job Post', new_job_posting_path, class: "nav-link" %>
             </li>
-            
+          </ul>
+          <ul class='navbar-nav ml-auto'>  
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Account
@@ -29,7 +21,13 @@
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <p class="dropdown-item"><%= current_employer.email %></p>
                 <div class="dropdown-divider"></div>
-                <%= link_to 'Log Out', destroy_employer_session_path, method: :delete, class: "dropdown-item" %>
+                  <% if current_employer.employer_profile == nil %>
+                    <%= link_to 'Create Profile', new_employer_profile_path, class: "dropdown-item" %>
+                  <% else %>
+                    <%= link_to 'Profile', current_employer.employer_profile, class: "dropdown-item" %>
+                  <% end %>
+                <div class="dropdown-divider"></div>
+                  <%= link_to 'Log Out', destroy_employer_session_path, method: :delete, class: "dropdown-item" %>
               </div>
             </li>
           </ul>

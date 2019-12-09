@@ -7,7 +7,7 @@ module JobPostings
     def create
       @job_application = @job_posting.job_applications.new(employee: current_employee, status: 2)
       if already_applied?
-        redirect_to root_path, notice: "You can't apply more than once"
+        redirect_to root_path, alert: "You can't apply more than once"
       else 
         @job_application.save
         redirect_to root_path, notice: 'Job Application was successful.'

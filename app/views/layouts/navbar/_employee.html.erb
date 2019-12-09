@@ -7,25 +7,23 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-      
-            <li class="nav-item active">
-              <% if current_employee.employee_profile == nil %>
-                <%= link_to 'Create Profile', new_employee_profile_path, class: "nav-link" %>
-              <% else %>
-                <%= link_to 'Profile', current_employee.employee_profile, class: "nav-link" %>
-              <% end %>
-            </li>
-      
             <li class="nav-item active">
               <%= link_to 'Applications', job_applications_path, class: "nav-link" %>
             </li>
-      
+          </ul>
+          <ul class='navbar-nav ml-auto'>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Account
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item"><%= current_employee.email %></a>
+                  <div class="dropdown-divider"></div>
+                  <% if current_employee.employee_profile == nil %>
+                    <%= link_to 'Create Profile', new_employee_profile_path, class: "dropdown-item" %>
+                  <% else %>
+                    <%= link_to 'Profile', current_employee.employee_profile, class: "dropdown-item" %>
+                  <% end %>  
                 <div class="dropdown-divider"></div>
                   <%= link_to 'Log Out', destroy_employee_session_path, method: :delete, class: "dropdown-item" %>
               </div>

@@ -1,5 +1,3 @@
 <% if current_employer %>
   <%= render 'employee_profiles'%>
-    <%= link_to 'Accept Application', job_application_accept_path(@job_application), method: :patch %>
-    <%= link_to 'Reject Application', job_application_reject_path(@job_application), method: :patch %>
 <% end %>

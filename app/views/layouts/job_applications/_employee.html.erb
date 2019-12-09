@@ -1,11 +1,46 @@
+<h2>Manage Your Applications</h2><br>
 <% @current_employee.job_applications.each do |post|%>
-  <div class='container'>
-    <%= 'Opening for '%>
-    <strong> <%= link_to post.job_posting.title, job_posting_url(post.job_posting) %> </strong>
-    <%= 'at #'%>
-    <strong> <%= post.job_posting.employer.employer_profile.business_name %> </strong>
-    <%= 'starting: '%>
-    <%= post.job_posting.start_time.strftime("%d %b %Y at %H:%m") %>
-    <%= link_to 'Cancel Application', post, method: :delete, data: {confirm: 'Are you sure?'} %>
-  </div>
-<% end %>
+  <div class="section-panel">
+    <div class="section-panel__inner">
+      <div class="flex flex--align-items flex--justify-between">
+          <h2>
+            <%= link_to post.job_posting.title, job_posting_url(post.job_posting) %>
+          </h2>
+          <div>
+            <span class="chip"><%= post.job_posting.profession.name %></span>
+          </div>
+        </div>
+          <p>
+            <%= post.job_posting.employer.employer_profile.business_name %>
+          </p>
+        <hr>
+        <h5>Content</h5>
+        <p>
+          <%= post.job_posting.content %>
+        </p>
+        <hr>
+        <div class="flex flex--gutters">
+          <div>
+            <span><strong>Start: </strong><%= post.job_posting.start_time.strftime("%d %b %Y at %H:%m") %></span>
+          </div>
+          <div>
+            <span class="vertical-divider"></span>
+          </div>
+          <div>
+            <span><strong>End: </strong><%= post.job_posting.end_time.strftime("%d %b %Y at %H:%m")%></span>
+          </div>
+          <div>
+            <span class="vertical-divider"></span>
+          </div>
+          <div>
+            <span><strong>Hourly Rate: </strong><%= post.job_posting.hourly_rate %></span>
+          </div>
+        </div>  
+        <hr>
+        <div>
+          <%= link_to 'Cancel Application', post, method: :delete, data: {confirm: 'Are you sure?'}, class: 'button button--danger' %>
+        </div>
+    </div>
+</div>
+<br>
+<%end %>

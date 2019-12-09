@@ -19,12 +19,20 @@
 
   <body class="d-flex flex-column">
     <%= render 'layouts/navbar' %>
-    <%= flash.alert %>
-    <%= flash.notice %>
     <div class="content-wrap" id="page-content">
-      <div class="content-main">
-        <%= yield %>
-      </div>
+      <% if flash.alert %>
+        <div class="alert alert-danger" role="alert">
+          <%= flash.alert %>
+        </div>
+      <% end %>
+      <% if flash.notice %>
+        <div class="alert alert-success" role="alert">
+          <%= flash.notice %>
+        </div>
+      <% end %>
+        <div class="content-main">
+          <%= yield %>
+        </div>
     </div>
     
   </body>

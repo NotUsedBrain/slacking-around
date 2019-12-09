@@ -1,9 +1,55 @@
+<h2>Manage Your Applications</h2><br>
 <% if current_employer %>
-    <% @current_employer.job_postings.each do |post|%>
-      <div class='container'>
-        <strong> <%= link_to post.title, post %> </strong>
-        <%= 'starting: '%>
-        <%= post.start_time.strftime("%d %b %Y at %H:%m") %>
+  <% @current_employer.job_postings.each do |post|%>
+    <div class="section-panel">
+      <div class="section-panel__inner">
+        <div class="flex flex--align-items flex--justify-between">
+          <h2>
+            <%= link_to post.title, post %>
+          </h2>
+          <div>
+            <span class="chip"><%= post.profession.name %></span>
+          </div>
+        </div>
+        <hr>
+        <h5>Content</h5>
+        <p>
+          <%= post.content %>
+        </p>
+        <hr>
+        <div class="flex flex--gutters">
+          <div>
+            <span><strong>Start: </strong><%= post.start_time.strftime("%d %b %Y at %H:%m") %></span>
+          </div>
+          <div>
+            <span class="vertical-divider"></span>
+          </div>
+          <div>
+            <span><strong>End: </strong><%= post.end_time.strftime("%d %b %Y at %H:%m")%></span>
+          </div>
+          <div>
+            <span class="vertical-divider"></span>
+          </div>
+          <div>
+            <span><strong>Hourly Rate: </strong><%= post.hourly_rate %></span>
+          </div>
+        </div>  
+        <hr>
+        <div class="flex flex--align-items justify-content-between">
+          <div>
+            <h5>Pending Applications: <%= link_to post.job_applications.count, post%></h5>
+          </div>
+          <div>
+            <span class="vertical-divider"></span>
+          </div>
+          <div>
+            <%= link_to 'Delete', post, method: :delete, data: {confirm: 'Are you sure?'}, class: 'button button--danger' %>
+          </div>
+        </div>
       </div>
+    </div>
+  <br>
     <% end %>
   <% end %>
+
+  

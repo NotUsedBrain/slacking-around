@@ -2,6 +2,7 @@ class JobPostingsController < ApplicationController
   before_action :find_job_posting, only: [:show, :edit, :update, :destroy]
   
   def index
+    # @job_postings = @job_postings.order('created_at DESC') requires db migration add_created_at_to_job_postings created_at:datetime
     @job_postings = if current_employer
                       current_employer.job_postings
                     elsif current_employee

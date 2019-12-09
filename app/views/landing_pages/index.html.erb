@@ -1,5 +1,42 @@
 <% @job_postings.each do |job| %>
-  <div class='container'>
-    <%= link_to job.title, job %>
-  </div>
-<% end %>
+  <%# <% if job.start_time > Time.current%>
+    <div class="section-panel">
+      <div class="section-panel__inner">
+        <div class="flex flex--align-items flex--justify-between">
+          <h5><%= link_to job.title, job %></h5>
+          <div>
+            <span class="chip"><%= job.profession.name %></span>
+          </div>
+        </div>
+        <div class="blurry-text">
+        <%= job.employer.employer_profile.business_name %>
+        </div>
+        <hr>
+        <div>
+          <h5>Content</h5>
+          <p>Please log in or sign up to see more information.</p>
+        </div>
+        <hr>
+        <div class="flex flex--gutters">
+          <div class="blurry-text">
+            <span><strong>Start: </strong><%= job.start_time.strftime("%d %b %Y at %H:%m") %></span>
+          </div>
+          <div>
+            <span class="vertical-divider"></span>
+          </div>
+          <div class="blurry-text">
+            <span><strong>End: </strong><%= job.end_time.strftime("%d %b %Y at %H:%m")%></span>
+          </div>
+          <div>
+            <span class="vertical-divider"></span>
+          </div>
+          <div class="blurry-text">
+            <span><strong>Hourly Rate: </strong><%= job.hourly_rate %></span>
+          </div>
+        </div>  
+        <hr>
+      </div>
+    </div>
+    <br>
+    <%# <% end %>
+  <% end %>

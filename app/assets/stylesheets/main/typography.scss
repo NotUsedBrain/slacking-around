@@ -4,6 +4,12 @@ h3,
 h4,
 h5,
 h6,
-p {
+p,
+div {
   font-family: 'Crete Round', serif;
+}
+
+.blurry-text {
+  text-shadow: 0 0 32px black;
+  color: transparent;
 }

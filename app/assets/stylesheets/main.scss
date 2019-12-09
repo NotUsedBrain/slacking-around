@@ -15,6 +15,7 @@
 // Element styles
 @import './main/body_text.scss';
 @import './main/button.scss';
+@import './main/card.scss';
 @import './main/chip.scss';
 @import './main/headings.scss';
 
@@ -23,3 +24,8 @@
 
 // Trump styles
 @import './main/vertical_divider.scss';
+
+//Navbar
+@import './main/navbar.scss';
+// Alert styles
+@import './main/alert.scss';

@@ -1,31 +1,42 @@
-<div>
-  <% if current_employer %>
-    <p>
-      <% if @job_application.employee.employee_profile.avatar.attached? %>
-        <%= image_tag(@job_application.employee.employee_profile.avatar, :class => "style_image")  %>
-      <% else %>
-        <%= image_tag('default.jpg', :class => "style_image") %>
+<section class="card-container">
+  <article class="card">
+    <div class="card__header">
+      <% if current_employer %>
+        <% if @job_application.employee.employee_profile.avatar.attached? %>
+          <%= image_tag(@job_application.employee.employee_profile.avatar, :class => "card__image")  %>
+        <% else %>
+          <%= image_tag('default.jpg', :class => "card__image") %>
+        <% end %>
+
+        <div class="card__body">
+          <h5 class="card__title">Name:</h5>
+          <p class="card__content">
+            <%= @job_application.employee.employee_profile.full_name %> 
+          </p>
+
+          <h5 class="card__title">Date of Birth:</h5>
+          <p class="card__content">
+            <%= @job_application.employee.employee_profile.date_of_birth %> 
+          </p>
+
+          <h5 class="card__title">Profession:</h5>
+          <p class="card__content">
+            <%= @job_application.employee.employee_profile.profession.name %> 
+          </p>
+
+          <h5 class="card__title">Feedback/Bio:</h5>
+          <p class="card__content">
+            <%= truncate(@job_application.employee.employee_profile.bio, length: 1500)%>
+          </p>
+        </div>
+      </div>
+
+        <footer class="card__footer">
+          <%= link_to 'Accept Application', job_application_accept_path(@job_application), method: :patch, class: 'button button--success' %>
+          <span class="vertical-divider"></span>
+          <%= link_to 'Reject Application', job_application_reject_path(@job_application), method: :patch, class: 'button button--danger' %>
+        </footer>
       <% end %>
-    </p>
+  </article>
+</section>
 
-    <p> 
-      <strong>First name:</strong>
-      <%= @job_application.employee.employee_profile.first_name %> 
-    </p>
-
-    <p> 
-      <strong>Last name:</strong>
-      <%= @job_application.employee.employee_profile.last_name %> 
-    </p>
-
-    <p> 
-      <strong>Date of birth:</strong>
-      <%= @job_application.employee.employee_profile.date_of_birth %> 
-    </p>
-
-    <p>   
-      <strong>Profession:</strong>
-      <%= @job_application.employee.employee_profile.profession.name %> 
-    </p>
-  <% end %>
-</div>
