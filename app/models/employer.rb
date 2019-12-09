@@ -7,4 +7,5 @@ class Employer < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
 
   has_many :job_postings
+  has_many :comments, dependent: :destroy
 end
