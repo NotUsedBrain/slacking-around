@@ -7,30 +7,32 @@
         <% else %>
           <%= image_tag('default.jpg', :class => "card__image") %>
         <% end %>
-
         <div class="card__body">
           <h5 class="card__title">Name:</h5>
           <p class="card__content">
             <%= @job_application.employee.employee_profile.full_name %> 
           </p>
-
           <h5 class="card__title">Date of Birth:</h5>
           <p class="card__content">
             <%= @job_application.employee.employee_profile.date_of_birth %> 
           </p>
-
           <h5 class="card__title">Profession:</h5>
           <p class="card__content">
             <%= @job_application.employee.employee_profile.profession.name %> 
           </p>
-
-          <h5 class="card__title">Feedback/Bio:</h5>
+        </div>
+      </div>
+        <div class="card__body">
+          <h5 class="card__title">Bio:</h5>
           <p class="card__content">
             <%= truncate(@job_application.employee.employee_profile.bio, length: 1500)%>
           </p>
         </div>
-      </div>
-
+        <h2>Feedbacks:</h2>
+        <%= form_with(model: [@job_application.employee.employee_profile, @employee_profile.comments.build]) do |f| %>
+          <%= f.text_area :content, placeholder: "write a feedback for this Employee" %><br>
+          <%= f.submit "post", class: "btn btn-primary" %>
+        <% end %>
         <footer class="card__footer">
           <%= link_to 'Accept Application', job_application_accept_path(@job_application), method: :patch, class: 'button button--success' %>
           <span class="vertical-divider"></span>
@@ -39,4 +41,3 @@
       <% end %>
   </article>
 </section>
-

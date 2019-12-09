@@ -1,13 +1,12 @@
 class CommentsController < ApplicationController
 
   def create
-    @employee_profile = Employee_Profile.find(params[employee_profile_id])
+    @employee_profile = EmployeeProfile.find(params[:employee_profile_id])
     @comment = @employee_profile.comments.build(comment_params)
-    @comment.employer_id = current_employer.id
     if @comment.save
-      redirect_to @Employee_Profile
+      redirect_to @employee_profile
     else
-      redirect_to @Employee_Profile, notice: "Could not save your feedback! HAHA"
+      redirect_to @employee_profile, notice: "Could not save your feedback! HAHA"
     end
   end
 

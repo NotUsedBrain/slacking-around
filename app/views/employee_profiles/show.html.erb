@@ -42,9 +42,9 @@
   <%= f.submit "post", class: "btn btn-primary" %>
 <% end %>
 <br>
-<hr>
 <% @comments.each do |comment| %>
   <h5>
-    wrote <% time_ago_in_words(comment.created_at) ago %>
+    <%= comment.employer.employer_profile.business_name %> wrote <% time_ago_in_words(comment.created_at) %> ago
   </h5>
+<% end %>
 

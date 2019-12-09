@@ -5,6 +5,7 @@ class EmployeeProfile < ApplicationRecord
 
   
   has_many :comments, dependent: :destroy
+  accepts_nested_attributes_for :comments
   has_one_attached :avatar
 
   def full_name
