@@ -36,8 +36,15 @@
 
 <br>
 <br>
-<h2>Comments:</h2>
+<h2>Feedbacks:</h2>
 <%= form_with(model: [@employee_profile, @employee_profile.comments.build]) do |f| %>
-  <%= f.text_area :content, placeholder: "write a comment for this Employee" %><br>
+  <%= f.text_area :content, placeholder: "write a feedback for this Employee" %><br>
   <%= f.submit "post", class: "btn btn-primary" %>
 <% end %>
+<br>
+<hr>
+<% @comments.each do |comment| %>
+  <h5>
+    wrote <% time_ago_in_words(comment.created_at) ago %>
+  </h5>
+

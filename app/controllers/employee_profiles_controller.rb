@@ -4,6 +4,7 @@ class EmployeeProfilesController < ApplicationController
   # GET /employee_profiles/1
   # GET /employee_profiles/1.json
   def show
+    @comments = Comment.where("employee_profile_id = ?", params[:id])
   end
 
   def index
