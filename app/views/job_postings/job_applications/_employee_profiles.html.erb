@@ -28,11 +28,7 @@
             <%= truncate(@job_application.employee.employee_profile.bio, length: 1500)%>
           </p>
         </div>
-        <h2>Feedbacks:</h2>
-        <%= form_with(model: [@job_application.employee.employee_profile, @employee_profile.comments.build]) do |f| %>
-          <%= f.text_area :content, placeholder: "write a feedback for this Employee" %><br>
-          <%= f.submit "post", class: "btn btn-primary" %>
-        <% end %>
+      
         <footer class="card__footer">
           <%= link_to 'Accept Application', job_application_accept_path(@job_application), method: :patch, class: 'button button--success' %>
           <span class="vertical-divider"></span>

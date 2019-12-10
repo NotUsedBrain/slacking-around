@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-
+  before_action :comment_params
   def create
     @employee_profile = EmployeeProfile.find(params[:employee_profile_id])
     @comment = @employee_profile.comments.build(comment_params)

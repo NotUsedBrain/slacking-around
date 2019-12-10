@@ -4,7 +4,7 @@ class EmployeeProfile < ApplicationRecord
   validates :profession_id, presence: true
 
   
-  has_many :comments, dependent: :destroy
+  has_many :comments
   accepts_nested_attributes_for :comments
   has_one_attached :avatar
 
