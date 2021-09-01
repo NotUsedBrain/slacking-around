@@ -1,19 +1,46 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>First name:</strong>
-  <%= @employer_profile.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @employer_profile.last_name %>
-</p>
-
-<p>
-  <strong>Business name:</strong>
-  <%= @employer_profile.business_name %>
-</p>
-
-<%= link_to 'Edit', edit_employer_profile_path(@employer_profile) %> |
-<%= link_to 'Back', root_path %>
+<h2>Profile</h2>
+<section class="card-container__profile">
+  <article>
+    <div class="card__header">
+      <div class="card__body">
+        <% if @employer_profile.avatar.attached? %>
+          <%= image_tag(@employer_profile.avatar, :class => "card__image__profile") %>
+        <% else %>
+          <%= image_tag('default.jpg', :class => "card__image__profile") %>
+        <% end %>
+        </div>
+      <br>
+      <div class="card__body">
+        <h5 class="card__title">Name:</h5>
+        <p class="card__content">
+          <%= @employer_profile.full_name %>
+        </p>
+        <h5 class="card__title">Business Name:</h5>
+        <p class="card__content">
+          <%= @employer_profile.business_name %>
+        </p>
+        <h5 class="card__title">Job Postings Count:</h5>
+        <p class="card__content">
+          <%= link_to @employer_profile.employer.job_postings.count, job_postings_path %>
+        </p>
+      </div>
+    </div>
+        <div class="col-xs-1 center-block" style="text-align:center;">
+        <%= link_to 'Edit', edit_employer_profile_path(@employer_profile), class: 'button button--primary' %>
+        </div>
+        <br>
+        <div class="col-xs-1 center-block" style="text-align:center;">
+        <%= link_to 'Back', root_path, class: 'button button--tertiary' %>
+      </div>
+  </article>
+</section>
+<br>
+<h2>Past Applications</h2>
+<br>
+<section>
+  <% if current_employer %>
+    <% @current_employer.job_postings.order("created_at DESC").each do |post|%>
+      <%= render 'job_postings/posting', job: post %>
+    <% end %>
+  <% end %>
+</section>

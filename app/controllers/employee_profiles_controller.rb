@@ -66,6 +66,12 @@ class EmployeeProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def employee_profile_params
-      params.require(:employee_profile).permit(:profession_id, :first_name, :last_name, :date_of_birth, :avatar)
+      params.require(:employee_profile).permit(:employee_id, :profession_id, :first_name, :last_name, :bio, :date_of_birth, :avatar)
     end
+
+    def already_applied?
+      JobApplication.where(employee_id: current_employee.id, job_posting_id:
+      params[:job_posting_id]).exists?
+    end
+
 end

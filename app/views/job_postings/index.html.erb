@@ -1,5 +1,23 @@
-<% @job_postings.each do |job| %>
-  <div class='container'>
-    <%= link_to job.title, job %>
-  </div>
+<% if current_employee %>
+  <% current_employee.employee_profile.profession.job_postings.order("created_at DESC").each do |job| %>
+    <%= render 'job_postings/posting', job: job %>
+  <% end %>
+<% else %>
+  <% if current_employer && @job_postings.blank? %>
+    <div class="section-panel section-panel--theme">
+      <div class="section-panel">
+        <div class="section-panel__inner">
+          <h4 class="text-white">You do not have any job postings yet.</h4>
+          <div style="margin-top: 40px">
+            <%= link_to 'New Posting', new_job_posting_path, class: 'button button--secondary' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <% @job_postings.each do |job| %>
+    <%# if job.start_time > Time.current %> 
+      <%= render 'job_postings/posting', job: job %>
+    <%# end %>
+  <% end %>
 <% end %>

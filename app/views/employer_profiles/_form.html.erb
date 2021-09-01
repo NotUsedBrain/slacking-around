@@ -1,32 +1,63 @@
-<%= form_with(model: employer_profile, local: true) do |form| %>
-  <% if employer_profile.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(employer_profile.errors.count, "error") %> prohibited this employer_profile from being saved:</h2>
-
-      <ul>
-        <% employer_profile.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+<section class="card-container__profile">
+    <article>
+      
+      <%= form_with(model: employer_profile, local: true) do |form| %>
+        <% if employer_profile.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(employer_profile.errors.count, "error") %> prohibited this employer_profile from being saved:</h2>
+            <ul>
+              <% employer_profile.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :business_name %>
-    <%= form.text_field :business_name %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+          <div class="card__header">
+            <div class="card__body__profile">
+            <br>
+              <% if @employer_profile.avatar.attached? %>
+                <%= image_tag(@employer_profile.avatar, :class => "card__image__profile") %>
+              <% else %>
+                <%= image_tag('default.jpg', :class => "card__image__profile") %>
+              <% end %>
+            <br>
+              <div class="card__body__profile">
+                <h5 class="card__title">Business Picture:</h5>
+                <p class="card__content">
+                  <%= form.file_field :avatar, class: 'form-control-file' %>
+                </p>
+              </div>
+            </div>
+            <span>
+              <div class="card__body"></div>
+            </span>
+            <div class="card__body__profile">
+            <br>
+              <h5 class="card__title">First Name:</h5>
+              <p class="card__content">
+                <%= form.text_field :first_name, class: 'form-control' %>
+              </p>
+    
+              <h5 class="card__title">Last Name:</h5>
+              <p class="card__content">
+                <%= form.text_field :last_name, class: 'form-control' %>
+              </p>
+    
+              <h5 class="card__title">Business Name:</h5>
+              <p class="card__content">
+                <%= form.text_field :business_name, class: 'form-control' %>
+              </p>
+            </div>
+          </div>
+          <div class="col-xs-1 center-block" style="text-align:center">
+            <%= form.submit :Submit, class: 'button button--primary' %>
+          </div>
+          <br>
+          <div class="col-xs-1 center-block" style="text-align:center">
+            <%= link_to 'Back', @employer_profile, class: 'button button--tertiary'%>
+          </div>
+        </div>
+      <% end %>
+    </article>
+  </section>

@@ -1,5 +1,28 @@
-<% @job_postings.each do |job| %>
-  <div class='container'>
-    <%= link_to job.title, job %>
-  </div>
-<% end %>
+<h2>Available Jobs</h2><br>
+
+<% @job_postings.order("created_at DESC").each do |job| %>
+  <%# <% if job.start_time > Time.current%>
+    <div class="section-panel section-panel--theme">
+      <div class="section-panel__inner">
+        <div class="flex flex--align-items flex--justify-between">
+          <h3 style="font-size: 2.75rem"><%= link_to "#{job.title}", job, class: 'text-white' %></h3>
+          <div style="background: white; padding: 5px 15px 5px 30px;border-radius: 30px;">
+            <% if job.profession.name == 'Chef' %>
+              <%= link_to image_tag('kitchen_rgb.svg', height: 40, alt: "Brand"), root_path, class: 'navbar-brand' %>
+            <% elsif job.profession.name == 'Catering Manager' %>
+              <%= link_to image_tag('catering_rgb.svg', height: 40, alt: "Brand"), root_path, class: 'navbar-brand' %>
+            <% elsif job.profession.name == 'Bar Tender' %>
+              <%= link_to image_tag('bar_rgb.svg', height: 40, alt: "Brand"), root_path, class: 'navbar-brand' %>
+            <% end %>
+          </div>
+        </div>
+        <hr class="horizontal-divider">
+        <div>
+          <p class="text-white">Please log in or sign up to see more information.</p>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <%# <% end %>
+  <% end %>

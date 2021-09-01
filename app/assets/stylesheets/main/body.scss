@@ -1,0 +1,20 @@
+html, 
+body {
+  height: 100%;
+  font-family: 'Crete Round', serif;
+  font-size: 1rem;
+  color: $mortar;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+  background-color: black !important;
+  
+  background: url(asset_path('wave2.png')) repeat fixed transparent right;
+  // background: url(wave2.png) repeat fixed transparent right;
+  background-position: 750px 0; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

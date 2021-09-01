@@ -1,30 +1,72 @@
-<p id="notice"><%= notice %></p>
-
-<div>
-  <% if @employee_profile.avatar.attached? %>
-    <%= image_tag(@employee_profile.avatar, :class => "rounded-circle", :size => "240x240") %>
+<h2>Profile</h2>
+<section class="card-container__profile">
+  <article>
+    <div class="card__header">
+      <div class="card__body">
+        <% if @employee_profile.avatar.attached? %>
+          <%= image_tag(@employee_profile.avatar, :class => "card__image__profile")  %>
+        <% else %>
+          <%= image_tag('default.jpg', :class => "card__image__profile") %>
+        <% end %>
+      </div>
+      <div class="card__body__profile">
+        <h5 class="card__title">Profession:</h5>
+        <p class="card__content">
+          <%=  @employee_profile.profession.name %>
+        </p>
+        <h5 class="card__title">Name:</h5>
+        <p class="card__content">
+          <%= @employee_profile.full_name %>
+        </p>
+        <h5 class="card__title">Date of birth:</h5>
+        <p class="card__content">
+          <%= @employee_profile.date_of_birth %>
+        </p>
+      </div>
+    </div>
+      <div class="card__body">
+      <h5 class="card__title">Bio:</h5>
+        <p class="card__content">
+          <%= truncate(@employee_profile.bio, length: 1500) %>
+        </p>
+      </div>
+      <div class="col-xs-1 center-block" style="text-align:center;">
+        <% if current_employee %>
+          <%= link_to 'Edit', edit_employee_profile_path(@employee_profile), class: 'button button--primary' %>
+      </div>
+      <br>
+      <div class="col-xs-1 center-block" style="text-align:center;">
+          <%= link_to 'Back', root_path, class: 'button button--tertiary' %>
+        <% end %>
+      </div>
+    </div>
+  </article>
+</section>
+<br>
+<h2>Your Past Applications</h2>
+<section>
+  <% if current_employee %>
+  <% @current_employee.job_applications.order("created_at DESC").each do |post|%>
+   <div class="section-panel section-panel--theme">
+      <div class="section-panel__inner">
+        <div class="flex flex--align-items flex--justify-between">
+          <h3 style="font-size: 2.75rem"><%= link_to "#{post.job_posting.title}", post, class: 'text-white' %></h3>
+          <div style="background: white; padding: 5px 15px 5px 30px;border-radius: 30px;">
+            <% if post.job_posting.profession.name == 'Chef' %>
+              <%= link_to image_tag('kitchen_rgb.svg', height: 40, alt: "Brand"), root_path, class: 'navbar-brand' %>
+            <% elsif post.job_posting.profession.name == 'Catering Manager' %>
+              <%= link_to image_tag('catering_rgb.svg', height: 40, alt: "Brand"), root_path, class: 'navbar-brand' %>
+            <% elsif post.job_posting.profession.name == 'Bar Tender' %>
+              <%= link_to image_tag('bar_rgb.svg', height: 40, alt: "Brand"), root_path, class: 'navbar-brand' %>
+            <% end %>
+          </div>
+        </div>
+      <%= post.job_posting.employer.employer_profile.business_name %>
+      <hr>
+      <%= post.job_posting.start_time.strftime("%d %b %Y") %>
+    </div>
+  </div>
+  <br>
   <% end %>
-</div>
-
-<p>
-  <strong>Profession:</strong>
-  <%= @employee_profile.profession.name %>
-</p>
-
-<p>
-  <strong>First name:</strong>
-  <%= @employee_profile.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @employee_profile.last_name %>
-</p>
-
-<p>
-  <strong>Date of birth:</strong>
-  <%= @employee_profile.date_of_birth %>
-</p>
-
-<%= link_to 'Edit', edit_employee_profile_path(@employee_profile) %> |
-<%= link_to 'Back', root_path %>
+  <% end %>
+</section>

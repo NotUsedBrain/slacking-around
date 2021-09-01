@@ -57,3 +57,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 
 gem 'discard', '~> 1.0'
+
+#adding dotenv
+gem 'dotenv', '~> 2.7', '>= 2.7.5'

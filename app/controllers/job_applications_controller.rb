@@ -1,54 +1,61 @@
 class JobApplicationsController < ApplicationController
-include Discard::Model
+  before_action :find_job_application, only: %i[show create edit update destroy accept reject]
+  before_action :check_user
 
   def index
-    @job_applications = JobApplication.all
-    @job_postings = JobPosting.all
-  end
-
-  def new
-    @job_applications = JobApplication.new
-  end
-
-  def create
-    @job_posting = JobPosting.find(params[:job_posting_id])
-    @job_application = JobApplication.create(job_applications_params)
-    if @job_application.save
-      redirect_to job_applications_path
-    else
-      render :index
-    end
+    @job_application = JobApplication.all
   end
 
   def show
-    @job_posting = JobPosting.find(params[:id])
-  end
-
-  def view
-    @job_applications = JobApplication.find(params[:id])
+    @job_application = JobApplication.find(params[:id]).order("updated_at desc")  
+    @job_posting = JobPosting.all
   end
 
   def update
-    @job_applications = JobApplication.find(params[:id])
-    @job_applications.undiscard
-      redirect_to job_applications_path, notice: "Job Application Undiscarded"
-    if @job_applications.update_attributes(job_application_params)
-      redirect_to job_applications_path
+    @job_application = JobApplication.find(params[:id])
+    @job_application.undiscard
+      redirect_to job_applications_path, notice: 'Job Application Undiscarded'
+    if @job_application.update_attributes(job_applications_params)
+      redirect_to root_path
     else
       render :edit
     end
+  end
 
-    def destroy
-      @job_appplication.discard
-      redirect_to job_applications_path, notice: "Job Application Removed"
-    end
+  def accept
+    @job_application.update_attributes(status: 0)
+    redirect_to root_path, notice: "Application Approved"
+  end
 
+  def reject
+    @job_application.update_attributes(status: 1)
+    redirect_to root_path, notice: "Application Rejected"
+  end
+
+  def destroy
+    @job_application = JobApplication.find(params[:id])
+    @job_application.discard
+    redirect_to root_path, notice: 'Job Application Discarded'
+  end
+
+  def undiscard
+    @job_application = JobApplication.find(params[:id])
+    @job_application.undiscard
+    redirect_to root_path, notice: 'Job Application Undiscarded'
   end
 
   private
 
-  def job_application_params
-    params.require(:job_posting, :job_application).permit(:status, :job_posting_id, :employee_id)
-    # .merge(employee_id: current_employee.id, job_posting_id: current_job_posting.id))
+  def job_applications_params
+    params.permit(:status, :job_posting_id, :employee_id, :employer_id)
   end
+
+  def find_job_application
+    @job_application = JobApplication.find(params[:id] || params[:job_application_id])
+  end
+
+  def order
+    JobApplication.where(created_at: 1.month.ago.to_date..Date.current).order("updated_at desc")
+  end
+
 end

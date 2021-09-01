@@ -1,0 +1,16 @@
+// Place all the styles related to the Employee_Profiles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.style_image {
+    justify-content: center;
+    border: 1px solid white;
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+}
+
+.employee_profile_avatar{
+    border-radius: 50%;
+}

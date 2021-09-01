@@ -1,22 +1,57 @@
-<p>
-  <strong>Profession:</strong>
-  <%= @job_posting.profession.name %>
-</p>
+<div class="section-panel section-panel--theme">
+  <div class="section-panel__inner">
+    <div class="flex flex--align-items flex--justify-between">
+      <h3 class="text-white" style="font-size: 2.75rem"><%= @job_posting.title %> @ <%= @job_posting.employer.employer_profile.business_name %></h3>
+      <div style="background: white; padding: 5px 15px 5px 30px;border-radius: 30px;">
+        <% if @job_posting.profession.name == 'Chef' %>
+          <%= link_to image_tag('kitchen_rgb.svg', height: 40, alt: "Brand"), root_path, class: 'navbar-brand' %>
+        <% elsif @job_posting.profession.name == 'Catering Manager' %>
+          <%= link_to image_tag('catering_rgb.svg', height: 40, alt: "Brand"), root_path, class: 'navbar-brand' %>
+        <% elsif @job_posting.profession.name == 'Bar Tender' %>
+          <%= link_to image_tag('bar_rgb.svg', height: 40, alt: "Brand"), root_path, class: 'navbar-brand' %>
+        <% end %>
+      </div>
+    </div>
+    <hr class="horizontal-divider">
+    <div class="text-white"><%= simple_format(@job_posting.content) %></div>
+    <hr class="horizontal-divider">
+    <div class="flex flex--gutters">
+      <div class="text-white"><strong>Start: </strong><%= @job_posting.start_time.strftime("%d %b %Y at %H:%m") %></div>
+      <div><span class="vertical-divider"></span></div>
+      <div class="text-white"><strong>End: </strong><%= @job_posting.end_time.strftime("%d %b %Y at %H:%m")%></div>
+      <div><span class="vertical-divider"></span></div>
+      <div class="text-white"><strong>Hourly Rate: </strong><%= @job_posting.hourly_rate %></div>
+    </div>  
+    <hr class="horizontal-divider">
+    <div class="flex">
+      <% if current_employee %>
+        <%= form_with(model: JobApplication.new, url: job_posting_job_applications_path(@job_posting), local: true) do |form| %>
+          <%= form.submit 'Apply', data: { confirm: 'Please confirm your application by clicking OK:' }, class: 'button button--secondary' %>
+        <% end %> 
+      <% end %>
+      <% if current_employer %>
+        <%= link_to 'Delete', [@job_posting], method: :delete, data: { confirm: 'Are you sure you want to delete this job posting?' }, class: 'button button--danger' %>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Content:</strong>
-  <%= @job_posting.content %>
-</p>
-
-<p>
-  <strong>Start Time:</strong>
-  <%= @job_posting.start_time %>
+<% if current_employer %>
   <br>
-  <strong>End Time:</strong>
-  <%= @job_posting.end_time %>
-</p>
+  <h1 class="subheading text-white" style="margin-bottom: 20px">Applicants</h1>
 
-<p>
-  <strong>Hourly Rate:</strong>
-  <%= @job_posting.hourly_rate %>
-</p>
+  <% if current_employer && @job_posting.job_applications.applied.blank? %>
+    <div class="section-panel section-panel--theme">
+      <div class="section-panel__inner">
+        <h4 class="text-white">You do not have any applications yet.</h4>      
+      </div>
+    </div>
+  <% end %>
+
+  <div class="flex flex--gutters-2x">
+    <% @job_posting.job_applications.applied.each do |job_application| %>
+      <%= render 'applicant', application: job_application %>
+    <% end %>
+  </div>
+  
+<% end %>

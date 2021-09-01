@@ -6,7 +6,10 @@ class Employees::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   # def new
-  #   super
+  #   # Override Devise default behaviour and create a profile as well
+  #   super || build_resource({})
+  #   resource.build_employee_profile
+  #   respond_with self.resource
   # end
 
   # POST /resource
@@ -42,9 +45,9 @@ class Employees::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
+  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name, :first_name, :profession_id])
   # end
-
+ 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
   #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
@@ -59,6 +62,7 @@ class Employees::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
 
   skip_before_action :check_user, except: [:new, :create]
   # ...

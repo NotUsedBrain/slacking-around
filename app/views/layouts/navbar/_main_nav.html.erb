@@ -1,21 +1,21 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <%= link_to image_tag('brand-logo.png', size: '30x30', alt: "Brand"), root_path, class: 'navbar-brand' %>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          LOG IN
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <%= link_to 'Employee', employee_session_path, class: "dropdown-item" %>
-          <div class="dropdown-divider"></div>
-          <%= link_to 'Employer', employer_session_path, class: "dropdown-item" %>
+<div style="margin-top: 30px">
+  <div class="content-wrap">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <%= link_to image_tag('logo_rgb_reverse.svg', height: 50, alt: "Brand"), root_path, class: 'navbar-brand' %>
+        <button class="custom-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="nav navbar-nav ml-auto">
+            <li>
+              <a><%= link_to 'Employee', employee_session_path, class: "nav-link" %></a>
+            </li>
+            <li>
+              <a><%= link_to 'Employer', employer_session_path, class: "nav-link" %></a>
+            </li>
+          </ul>
         </div>
-      </li>
-    </ul>
+      </nav>      
   </div>
-</nav>
+</div>
 

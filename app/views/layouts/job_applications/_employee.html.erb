@@ -1,0 +1,37 @@
+<h2>Manage Your Applications</h2><br>
+<% @current_employee.job_applications.order("created_at DESC").each do |post|%>
+  <div class="section-panel section-panel--theme">
+    <div class="section-panel__inner">
+      <div class="flex flex--align-items flex--justify-between">
+        <h3 class="text-white" style="font-size: 2.75rem"><%= post.job_posting.title %> @ <%= post.job_posting.employer.employer_profile.business_name %></h3>
+        <div style="background: white; padding: 5px 15px 5px 30px;border-radius: 30px;">
+          <% if post.job_posting.profession.name == 'Chef' %>
+            <%= link_to image_tag('kitchen_rgb.svg', height: 40, alt: "Brand"), root_path, class: 'navbar-brand' %>
+          <% elsif post.job_posting.profession.name == 'Catering Manager' %>
+            <%= link_to image_tag('catering_rgb.svg', height: 40, alt: "Brand"), root_path, class: 'navbar-brand' %>
+          <% elsif post.job_posting.profession.name == 'Bar Tender' %>
+            <%= link_to image_tag('bar_rgb.svg', height: 40, alt: "Brand"), root_path, class: 'navbar-brand' %>
+          <% end %>
+        </div>
+      </div>
+      <hr class="horizontal-divider">
+      <div class="text-white"><%= simple_format(post.job_posting.content) %></div>
+      <hr class="horizontal-divider">
+      <div class="flex flex--gutters">
+        <div class="text-white"><strong>Start: </strong><%= post.job_posting.start_time.strftime("%d %b %Y at %H:%m") %></div>
+        <div><span class="vertical-divider"></span></div>
+        <div class="text-white"><strong>End: </strong><%= post.job_posting.end_time.strftime("%d %b %Y at %H:%m")%></div>
+        <div><span class="vertical-divider"></span></div>
+        <div class="text-white"><strong>Hourly Rate: </strong><%= post.job_posting.hourly_rate %></div>
+      </div>  
+      <hr class="horizontal-divider">
+      <div class="flex">
+        <div>
+          <%= link_to 'Cancel Application', post, method: :delete, data: {confirm: 'Are you sure?'}, class: 'button button--danger' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+<% end %>

@@ -1,20 +1,14 @@
 class Employee < ApplicationRecord
+  has_one :employee_profile, dependent: :destroy
+  accepts_nested_attributes_for :employee_profile
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
   
   has_many :job_applications
   has_many :job_postings, through: :job_applications
   has_many :feedbacks
-  has_one :employee_profile, dependent: :destroy
 
-  after_create :create_initial_employee_profile
-
-  def create_initial_employee_profile
-    return if self.employee_profile.present?
-
-    self.create_employee_profile
-  end
-
+  
 end

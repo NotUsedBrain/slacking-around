@@ -1,0 +1,35 @@
+// Base styling
+@import './main/breakpoints.scss';
+@import './main/font.scss';
+@import './main/typography.scss';
+@import './main/colors.scss';
+@import './main/body.scss';
+@import  './main/footer.scss';
+
+// Layout styles
+@import './main/content_wrap.scss';
+@import './main/content_main.scss';
+@import './main/section_panel.scss';
+@import './main/flex';
+@import './main/text.scss';
+
+// Element styles
+@import './main/body_text.scss';
+@import './main/button.scss';
+@import './main/card.scss';
+@import './main/chip.scss';
+@import './main/form.scss';
+@import './main/headings.scss';
+
+// Component styles
+@import './main/employee_profiles.scss';
+
+// Trump 
+@import './main/horozontal_divider.scss';
+@import './main/vertical_divider.scss';
+@import './main/trumps.scss';
+
+//Navbar
+@import './main/navbar.scss';
+// Alert styles
+@import './main/alert.scss';

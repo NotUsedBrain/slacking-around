@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p><%= @job_application.employee.employee_profile.full_name %> has applied for <%= @job_application.job_posting.title %><p>
+    <%= link_to 'View Application', job_posting_job_application_url(@job_application.job_posting, @job_application) %>
+  </body>
+</html>

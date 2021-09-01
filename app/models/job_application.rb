@@ -1,12 +1,16 @@
 class JobApplication < ApplicationRecord
     belongs_to :job_posting
-    # has_many :employees, through: :job_postings
     belongs_to :employee
 
-    enum status: %i[accepted rejected]
+    include Discard::Model
+    default_scope -> { kept }
+    scope :kept, -> { undiscarded.joins(:job_posting).merge(JobPosting.kept) }
 
-    # accepts_nested_attributes_for :job_posting, allow_destroy: true
-    # accepts_nested_attributes_for :skills, allow_destroy: true
+
+    enum status: { accepted: 0, rejected: 1, applied: 2, not_applied: 3 }
+
+    
+    # accepts_nested_attributes_for :employer, allow_destroy: true
 
     # validates(:content, presence: true)
 end

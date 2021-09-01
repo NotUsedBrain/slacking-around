@@ -1,6 +1,0 @@
-<%= form_with(model: @job_posting, local: true) do |form| %>
-  <% if @job_posting.present? %>
-    <%= f.hidden_field :status, :value => 1 %>
-    <%= f.submit "Approve", class: "btn btn-large btn-success" %>
-  <% end %>
-<% end %>

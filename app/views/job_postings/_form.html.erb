@@ -1,43 +1,69 @@
-<%= form_with(model: @job_posting, local: true) do |form| %>
-  <% if @job_posting.errors.present? %>
-    <% @job_posting.errors.full_messages.each do |error| %>
-      <p><%= error %></p> 
-    <% end %>
-  <% end %>
-  
-  <div class='form-inline'>
-    <%= form.label :title %>
-    <%= form.text_field :title, class: 'form-control' %>
-  </div>
+<div class="flex flex--justify-center">
+  <div class="section-panel section-panel--theme" style="min-width: 320px; max-width: 560px">
+    <div class="section-panel__inner">
+      <div class='text-center'>
+        <h2>Job Post</h2>
+        <%= form_with(model: @job_posting, local: true) do |form| %>
+          <% if @job_posting.errors.present? %>
+            <% @job_posting.errors.full_messages.each do |error| %>
+              <p><%= error %></p> 
+            <% end %>
+          <% end %>
 
-  <div>
-  <%= form.collection_select :profession_id, Profession.all, :id, :name, {prompt: "Choose a profession" } %>
-  </div>
-  
-  <div>
-    <%= form.label :content %>
-    <%= form.text_area :content %>
-  </div>
+          <div class='form-row justify-content-center'>      
+              <div class="form-group">
+                <%= form.label :title, class: 'form__label' %>
+                <%= form.text_field :title, class: 'form-control' %>
+            </div>
+          </div>
 
-  <div>
-    <%= form.label :start_time %>
-    <%= form.time_field :start_time %>
-  </div>
+          <div class='form-row justify-content-center'>      
+            <div class="form-group">
+              <%= form.label :hourly_rate, class: 'form__label' %>
+              <%= form.number_field :hourly_rate, step: :any, class: 'form-control', placeholder: '£ 0.00' %>
+            </div>
+          </div>
 
- <div>
-    <%= form.label :end_time %>
-    <%= form.time_field :end_time %>
-  </div>
+          <div class='form-row justify-content-center'>      
+            <div class="form-group">
+              <%= form.label :content, class: 'form__label' %>
+              <%= form.text_area :content, class: 'form-control' %>
+            </div>
+          </div>
 
- <div>
-    <%= form.label :hourly_rate %>
-    <%= form.number_field :hourly_rate, step: :any %>
-  </div>
-<br>
-  
-<br>
-  <div>
-    <%= form.submit :Submit %>
-  </div>
 
-<% end %>
+          <div class='form-row justify-content-center'>      
+            <div class="form-group">
+              <%= form.label :start_time, class: 'form__label' %>
+              <div>
+                  <%= form.text_field :start_time, class: 'datepicker' %>
+              </div>
+            </div>
+          </div>
+
+          <div class='form-row justify-content-center'>      
+            <div class="form-group">
+              <%= form.label :end_time, class: 'form__label' %>
+              <div>
+                  <%= form.text_field :end_time, class: 'datepicker' %>
+              </div>
+            </div>
+          </div>
+
+          <div class='form-row justify-content-center'>      
+            <div class="form-group">
+              <%= form.label :profession_id, class: 'form__label' %>
+              <%= form.collection_select :profession_id, Profession.all, :id, :name, {prompt: "Choose a profession" }, class: 'form-control' %>
+            </div>
+          </div>
+
+          <div class= 'form-row justify-content-center text-center'>
+            <div class='form-group'>
+              <%= form.submit :Submit, class: 'button button--secondary' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

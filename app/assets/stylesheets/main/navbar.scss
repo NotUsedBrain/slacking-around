@@ -1,0 +1,28 @@
+//logo styling
+img {
+  border-radius: 5px;
+}
+
+//navbar color
+.bg-light{
+  margin-top: 30px;
+  background-color: transparent !important;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light{
+  margin-top: 8px;
+}
+
+a.nav-link{
+  color: white !important;
+}
+
+h2{
+  color: white !important;
+}
+
+//hamburger toggler color
+
+.custom-toggler .navbar-toggler-icon {
+background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(240, 234, 238)' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
